@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport Player Salary Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Sport Player Salary Prediction</h1>
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="experience">Experience (Years)</label>
+                <input type="number" id="experience" name="experience" required>
+            </div>
+            <div class="form-group">
+                <label for="matches_played">Matches Played</label>
+                <input type="number" id="matches_played" name="matches_played" required>
+            </div>
+            <div class="form-group">
+                <label for="total_runs">Total Runs / Goals</label>
+                <input type="number" id="total_runs" name="total_runs" required>
+            </div>
+            <div class="form-group">
+                <label for="performance_rating">Performance Rating (1-10)</label>
+                <input type="number" step="0.1" id="performance_rating" name="performance_rating" required>
+            </div>
+            <button type="submit">Predict Salary</button>
+        </form>
+
+        {% if predicted_salary %}
+        <div class="result">
+            <h2>Prediction Results</h2>
+            <p><strong>Predicted Salary:</strong> ${{ predicted_salary }}</p>
+            <p><strong>Salary Category:</strong> {{ salary_category }}</p>
+            <hr>
+            <h3>Model Accuracy</h3>
+            <p><strong>Regression Model (R² Score):</strong> {{ r2_accuracy }}</p>
+            <p><strong>Classification Model (Accuracy):</strong> {{ classification_accuracy }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
